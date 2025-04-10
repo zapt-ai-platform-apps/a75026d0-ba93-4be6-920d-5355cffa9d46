@@ -1,4 +1,5 @@
 import React from 'react';
+import { EarningGuideView } from './modules/earningGuide';
 import ZaptBadge from './components/ZaptBadge';
 
 export default function App() {
@@ -18,12 +19,8 @@ export default function App() {
       </header>
       
       <main className="flex-grow">
-        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-          <div className="px-4 py-6 sm:px-0">
-            <div className="border-4 border-dashed border-gray-200 rounded-lg h-96 flex items-center justify-center">
-              <p className="text-gray-500 text-lg">Welcome to Huzaifa business</p>
-            </div>
-          </div>
+        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+          <EarningGuideView />
         </div>
       </main>
       
