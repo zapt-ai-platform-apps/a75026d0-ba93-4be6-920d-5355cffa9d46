@@ -1,28 +1,59 @@
-# Huzaifa business
+# Huzaifa Business - Earn Money App
 
-A business application built with React, Vite, and Tailwind CSS.
+A platform that allows users to earn money by completing tasks, taking surveys, and referring friends.
 
-## Development
+## Features
 
-1. Install dependencies:
-```
-npm install
-```
+- Complete tasks for payment
+- Take surveys to earn money
+- Referral program to earn commissions
+- User dashboard to track earnings
+- Secure wallet and payment withdrawal system
+- User profile and account management
 
-2. Start the development server:
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+   ```
+   npm install
+   ```
+3. Create a `.env` file with the required environment variables
+
+### Development
+
+Start the development server:
+
 ```
 npm run dev
 ```
 
-3. Build for production:
+### Building for Production
+
+Build the app:
+
 ```
 npm run build
 ```
 
-## Tech Stack
+Serve the built app:
 
-- React
+```
+npm run serve
+```
+
+## Technology Stack
+
+- React.js
+- TailwindCSS
+- Supabase Auth
+- React Router
 - Vite
-- Tailwind CSS
-- Sentry for error tracking
-- Progressier for PWA functionality
+- Sentry

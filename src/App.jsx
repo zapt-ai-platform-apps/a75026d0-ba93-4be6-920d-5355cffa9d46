@@ -1,35 +1,51 @@
 import React from 'react';
-import { EarningGuideView } from './modules/earningGuide';
-import ZaptBadge from './components/ZaptBadge';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from './modules/auth/useAuth';
+import Navbar from './modules/layout/Navbar';
+import Footer from './modules/layout/Footer';
+import Dashboard from './modules/dashboard/Dashboard';
+import Tasks from './modules/tasks/Tasks';
+import Surveys from './modules/surveys/Surveys';
+import Referrals from './modules/referrals/Referrals';
+import Wallet from './modules/wallet/Wallet';
+import Profile from './modules/profile/Profile';
+import LandingPage from './modules/landing/LandingPage';
+import TaskDetail from './modules/tasks/TaskDetail';
+import SurveyDetail from './modules/surveys/SurveyDetail';
+import LoadingSpinner from './modules/common/LoadingSpinner';
+import ZaptBadge from './modules/common/ZaptBadge';
 
 export default function App() {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return <LoadingSpinner fullScreen />;
+  }
+
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <div className="flex items-center">
-            <img 
-              src="https://supabase.zapt.ai/storage/v1/render/image/public/icons/c7bd5333-787f-461f-ae9b-22acbc0ed4b0/55145115-0624-472f-96b9-d5d88aae355f.png?width=48&height=48" 
-              alt="Huzaifa business logo" 
-              className="h-10 w-10 mr-3"
-            />
-            <h1 className="text-2xl font-bold text-gray-900">Huzaifa business</h1>
-          </div>
-        </div>
-      </header>
-      
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      <Navbar />
       <main className="flex-grow">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <EarningGuideView />
-        </div>
+        <Routes>
+          {/* Public routes */}
+          <Route path="/" element={!user ? <LandingPage /> : <Navigate to="/dashboard" />} />
+
+          {/* Protected routes */}
+          <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/" />} />
+          <Route path="/tasks" element={user ? <Tasks /> : <Navigate to="/" />} />
+          <Route path="/tasks/:taskId" element={user ? <TaskDetail /> : <Navigate to="/" />} />
+          <Route path="/surveys" element={user ? <Surveys /> : <Navigate to="/" />} />
+          <Route path="/surveys/:surveyId" element={user ? <SurveyDetail /> : <Navigate to="/" />} />
+          <Route path="/referrals" element={user ? <Referrals /> : <Navigate to="/" />} />
+          <Route path="/wallet" element={user ? <Wallet /> : <Navigate to="/" />} />
+          <Route path="/profile" element={user ? <Profile /> : <Navigate to="/" />} />
+          
+          {/* Fallback */}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
       </main>
-      
-      <footer className="bg-white">
-        <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <p className="text-gray-500 text-sm">© 2023 Huzaifa business. All rights reserved.</p>
-          <ZaptBadge />
-        </div>
-      </footer>
+      <Footer />
+      <ZaptBadge />
     </div>
   );
 }
